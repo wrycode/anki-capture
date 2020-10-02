@@ -116,6 +116,7 @@ Turning on this mode runs the normal hook `anki-capture-mode-hook'."
   (delete-region (point-min) (point-max))
   (kill-buffer "*anki-capture*"))
 
+;;;###autoload
 (defun anki-capture (prefix)
   "This is a unified command to handle adding Anki cards from
   anywhere in Emacs. It is like 'org-capture' for Anki
