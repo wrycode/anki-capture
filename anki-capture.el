@@ -159,7 +159,7 @@ Turning on this mode runs the normal hook `anki-capture-mode-hook'."
 				 nil nil default-deck)
 		anki-capture-tags
 		(completing-read-multiple "Choose tags (comma-separated, press TAB to complete): "
-					  (with-current-buffer storage-buffer (org-get-buffer-tags))
+					  (anki-editor-all-tags)
 					  nil nil (mapconcat 'print default-tags ",")))))
 
     ;; if the user hasn't set anki-capture-file we have to make sure storage-buffer is in org-mode
