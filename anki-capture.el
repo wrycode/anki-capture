@@ -107,6 +107,7 @@ Turning on this mode runs the normal hook `anki-capture-mode-hook'."
 
 (defun anki-capture-finish ()
   (interactive)
+  (anki-editor-mode)			       ;; this is necessary to properly push inline images
   (call-interactively 'anki-editor-push-notes) ;; pushes current note
   (kill-buffer "*anki-capture*"))
 
