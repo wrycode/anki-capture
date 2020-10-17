@@ -2,7 +2,7 @@
 ;;
 ;; © 2020 Nick Econopouly, Cheong Yiufung
 ;;
-;; URL: https://github.com/louietan/anki-editor
+;; URL: http://git.wrycode.com/wrycode/anki-capture/log.html
 ;;
 ;;; Commentary:
 ;; Perhaps you want to use Emacs and Org mode for quickly adding notes to
@@ -120,24 +120,25 @@ Turning on this mode runs the normal hook `anki-capture-mode-hook'."
 ;;;###autoload
 (defun anki-capture (prefix)
   "This is a unified command to handle adding Anki cards from
-  anywhere in Emacs. It is like 'org-capture' for Anki
-  cards. After adding a note, that note is synced to your
-  Anki-deck. 'anki-capture-file' must be set if you want to
-  persistently save a copy of your captured notes.
+anywhere in Emacs. 'anki-capture-finish' will close the temporary
+buffer and sync the note to Anki. 'anki-capture-file' must be set
+if you want to persistently save a copy of your captured notes,
+otherwise you can view notes from this session in a buffer called
+'*anki-capture-storage-buffer*'.
 
-  The first time you run this command (per session), you will be
-  asked to choose three \"note settings\": an Anki deck, note
-  type, and tags for the card you are adding. Subsequent runs
-  will just assume you want all of the same settings. To change
-  settings use prefix arguments as follows:
+The first time you run this command (per Emacs session), you will
+be asked to choose three \"note settings\": the deck, note type,
+and tags for the card you are adding. Subsequent calls will just
+assume you want all of the same settings. To change settings use
+prefix arguments as follows:
 
-  Use the single prefix argument (C-u) if you want to change some
-  of the note settings and keep some of them. Your previous
-  setting will automatically be filled in, so you can type enter
-  to keep it, or delete it (C-a C-k) to choose a new option.
+Use the single prefix argument (C-u) if you want to change some
+of the note settings and keep some of them. Your previous setting
+will automatically be filled in, so you can type enter to keep
+it, or delete it (C-a C-k) to choose a new option.
 
-  Use the double prefix argument (C-u C-u) if you want to start
-  fresh and choose new note settings."
+Use the double prefix argument (C-u C-u) if you want to start
+fresh and choose new note settings."
 
   (interactive "P")
 
