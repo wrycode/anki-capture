@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--  -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>&lrm;</title>
+<meta name="generator" content="Org mode">
+<style type="text/css">
+body {
+    line-height: 135%;
+    color: #333333;
+   font-family: Arial, sans-serif;
+    margin-top: 0;
+}
+pre {
+    border: 1px solid #333333;
+    border-radius: 5px;
+    padding: .5em;
+    white-space: pre-wrap;
+    word-wrap: normal;
+    max-height: 300px;
+    overflow-y: auto;
+}
+.title, h1, h2, h3, h4, h5 {
+    font-size: 1em;
+}
+h1.title {
+    padding-bottom: 5px;
+    border-bottom: 1px solid #333333;
+}
+.footer {
+    font-family: monospace;
+    font-size: 15px;
+    display: flex;
+    flex-direction: row;
+    padding-bottom: .5em;
+    border-top: 1px solid #333333;
+    padding-top: 5px;
+}
+
+.footer .bar {
+    vertical-align: bottom;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+/* footnote tweaks */
+.footpara {
+    width: 99%;
+    text-align: left;
+    padding: 0;
+    margin: 0;
+    padding-left: 3px;
+}
+.footdef {
+    line-height: 145%;
+    display:flex;
+}
+
+/* table of needs more tweaking */
+/* #table-of-contents > h2 { */
+/*     display:none; */
+/* } */
+/* #table-of-contents ul{ */
+/*     list-style-type:none; */
+/* } */
+/* #text-table-of-contents > ul > li > a { */
+/*     padding-left: 0; } */
+/* #text-table-of-contents ul { */
+/*     padding-left: 1em; */
+/*     margin: 0; */
+/* } */
+/* #text-table-of-contents > ul { */
+/*     padding-left:5px; */
+/* } */
+/* #text-table-of-contents li { */
+/*     margin: 0.4em 0; */
+/* } */
+/* #text-table-of-contents ul ul { */
+/*     margin: 0; */
+/* } */
+/* #text-table-of-contents li li { */
+/*     font-weight: normal; */
+/*     font-size: 90%; */
+/*     margin: 0; */
+/* } */
+</style>
+</head>
+<body>
+<div id="content">
+<div id="outline-container-orgd3e2465" class="outline-2">
+<h2 id="orgd3e2465">Description</h2>
+<div class="outline-text-2" id="text-orgd3e2465">
+<p>
+Anki-capture is an interface for adding notes to <a href="https://apps.ankiweb.net/">Anki</a> from Emacs that
+is analogous to <a href="https://orgmode.org/manual/Capture.html">org-capture</a>. It uses Org mode syntax to author notes
+so you can easily insert LaTeX formulas, images, and miscellaneous
+formatting. <a href="https://github.com/louietan/anki-editor">Anki-editor</a> provides the layout for notes and the elisp
+backend connection to <a href="https://ankiweb.net/shared/info/2055492159">AnkiConnect</a>. This package includes some helpful
+commands from <a href="https://yiufung.net/post/anki-org/">Cheong Yiufung</a> for quickly inserting <a href="https://docs.ankiweb.net/#/editing?id=cloze-deletion">cloze deletions</a>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org742bc54" class="outline-2">
+<h2 id="org742bc54">Installation</h2>
+<div class="outline-text-2" id="text-org742bc54">
+<p>
+Using <a href="https://github.com/raxod502/straight.el">straight.el</a> (recommended):
+</p>
+
+<div class="org-src-container">
+<pre class="src src-elisp">(straight-use-package `(anki-capture <span style="color: #8f0075;">:type</span> git <span style="color: #8f0075;">:repo</span> <span style="color: #223fbf;">"git://git.wrycode.com/wrycode/anki-capture.git"</span>))
+</pre>
+</div>
+
+<p>
+I haven&rsquo;t bothered with MELPA yet, but <code>anki-capture.el</code> is a standard
+elisp package (a single file with autoloads), so you can install it
+by visiting the buffer and running <code>package-install-from-buffer</code>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org959b95f" class="outline-2">
+<h2 id="org959b95f">Configuration</h2>
+<div class="outline-text-2" id="text-org959b95f">
+<p>
+Here are some recommended (optional) settings. Substitute your own
+preferred keybindings:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(define-key org-mode-map (kbd <span style="color: #223fbf;">"M-n"</span>) 'anki-editor-cloze-region-auto-incr) <span style="color: #505050;">; </span><span style="color: #505050;">cloze region using the next cloze number</span>
+(define-key org-mode-map (kbd <span style="color: #223fbf;">"M-N"</span>) 'anki-editor-cloze-region-dont-incr) <span style="color: #505050;">; </span><span style="color: #505050;">cloze region using the current cloze number</span>
+(define-key org-mode-map (kbd <span style="color: #223fbf;">"&lt;f10&gt;"</span>) 'anki-editor-reset-cloze-number)
+
+(<span style="color: #5317ac;">setq</span> anki-editor-create-decks t <span style="color: #505050;">;; </span><span style="color: #505050;">Allow anki-editor to create a new deck if it doesn't exist</span>
+      anki-editor-org-tags-as-anki-tags t) <span style="color: #505050;">; </span><span style="color: #505050;">use Org mode tags as Anki note tags</span>
+
+(define-key global-map (kbd <span style="color: #223fbf;">"C-c e"</span>) 'anki-capture) <span style="color: #505050;">; </span><span style="color: #505050;">capture a new note into Anki</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgae0ae3b" class="outline-2">
+<h2 id="orgae0ae3b">Usage</h2>
+<div class="outline-text-2" id="text-orgae0ae3b">
+<p>
+The idea is that you can use <code>anki-editor</code>&rsquo;s note format to add new
+notes to Anki as quickly as possible. Often you will want to add a
+series of similar notes. <code>anki-capture</code> will assume that you want the
+same note settings (Anki deck, tags, and Anki note type) each time you
+invoke it unless you use a prefix argument (C-u). See <code>anki-capture</code>&rsquo;s
+docstring for more info: <code>C-h f anki-capture</code>.
+</p>
+
+<p>
+If you do not set <code>anki-capture-file</code>, notes will be stored in a
+buffer called <code>*anki-capture-storage-buffer*</code>. This will NOT be saved
+if you restart Emacs.
+</p>
+
+<p>
+I recommend using underscores &ldquo;<code>_</code>&rdquo; to emulate spaces in your tags because
+this will work well in both Org mode and Anki.
+</p>
+</div>
+</div>
+</div>
+</body>
+</html>
