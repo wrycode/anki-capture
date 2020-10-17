@@ -1,13 +1,19 @@
 * Description
-Anki-capture is an interface for adding notes to [[https://apps.ankiweb.net/][Anki]] from Emacs that
-is analogous to [[https://orgmode.org/manual/Capture.html][org-capture]]. It uses Org mode syntax to author notes
-so you can easily insert LaTeX formulas, images, and miscellaneous
-formatting. [[https://github.com/louietan/anki-editor][Anki-editor]] provides the layout for notes and the elisp
-backend connection to [[https://ankiweb.net/shared/info/2055492159][AnkiConnect]]. This package includes some helpful
-commands from [[https://yiufung.net/post/anki-org/][Cheong Yiufung]] for quickly inserting [[https://docs.ankiweb.net/#/editing?id=cloze-deletion][cloze deletions]].
+Anki-capture is an interface for adding notes to
+[[https://apps.ankiweb.net/][Anki]] from Emacs that is analogous to
+[[https://orgmode.org/manual/Capture.html][org-capture]]. It uses Org
+mode syntax to author notes so you can easily insert LaTeX formulas,
+images, and miscellaneous
+formatting. [[https://github.com/louietan/anki-editor][Anki-editor]]
+provides the layout for notes and the elisp backend connection to
+[[https://ankiweb.net/shared/info/2055492159][AnkiConnect]]. This
+package includes some helpful commands from
+[[https://yiufung.net/post/anki-org/][Cheong Yiufung]] for quickly
+inserting cloze deletions.
 
 * Installation
-Using [[https://github.com/raxod502/straight.el][straight.el]] (recommended):
+Using [[https://github.com/raxod502/straight.el][straight.el]]
+(recommended):
 
 #+begin_src elisp
 (straight-use-package `(anki-capture :type git :repo "git://git.wrycode.com/wrycode/anki-capture.git"))
@@ -22,14 +28,18 @@ Here are some recommended (optional) settings. Substitute your own
 preferred keybindings:
 
 #+begin_src emacs-lisp
-(define-key org-mode-map (kbd "M-n") 'anki-editor-cloze-region-auto-incr) ; cloze region using the next cloze number
-(define-key org-mode-map (kbd "M-N") 'anki-editor-cloze-region-dont-incr) ; cloze region using the current cloze number
+;; cloze region using the next cloze number
+(define-key org-mode-map (kbd "M-n") 'anki-editor-cloze-region-auto-incr)
+;; cloze region using the current cloze number
+(define-key org-mode-map (kbd "M-N") 'anki-editor-cloze-region-dont-incr)
+
 (define-key org-mode-map (kbd "<f10>") 'anki-editor-reset-cloze-number)
 
-(setq anki-editor-create-decks t ;; Allow anki-editor to create a new deck if it doesn't exist
-      anki-editor-org-tags-as-anki-tags t) ; use Org mode tags as Anki note tags
 
-(define-key global-map (kbd "C-c e") 'anki-capture) ; capture a new note into Anki
+(setq anki-editor-create-decks t ;; Allow anki-editor to create a new deck if it doesn't exist
+      anki-editor-org-tags-as-anki-tags t) ;; use Org mode tags as Anki note tags
+
+(define-key global-map (kbd "C-c e") 'anki-capture) ;; capture a new note into Anki
 #+end_src
 
 
