@@ -1,0 +1,68 @@
+* Description
+Anki-capture is an interface for adding notes to
+[[https://apps.ankiweb.net/][Anki]] from Emacs that is analogous to
+[[https://orgmode.org/manual/Capture.html][org-capture]]. It uses Org
+mode syntax to author notes so you can easily insert LaTeX formulas,
+images, and miscellaneous
+formatting. [[https://github.com/louietan/anki-editor][Anki-editor]]
+provides the layout for notes and the elisp backend connection to
+[[https://ankiweb.net/shared/info/2055492159][AnkiConnect]]. This
+package includes some helpful commands from
+[[https://yiufung.net/post/anki-org/][Cheong Yiufung]] for quickly
+inserting cloze deletions.
+
+* Installation
+Using [[https://github.com/raxod502/straight.el][straight.el]]
+(recommended):
+
+#+begin_src elisp
+(straight-use-package `(anki-capture :type git :repo "git://git.wrycode.com/wrycode/anki-capture.git"))
+#+end_src
+
+I haven't bothered with MELPA yet, but =anki-capture.el= is a standard
+elisp package (a single file with autoloads), so you can install it
+by visiting the buffer and running =package-install-from-buffer=.
+
+* Configuration
+Here are some recommended (optional) settings. Substitute your own
+preferred keybindings:
+
+#+begin_src emacs-lisp
+;; cloze region using the next cloze number
+(define-key org-mode-map (kbd "M-n") 'anki-editor-cloze-region-auto-incr)
+;; cloze region using the current cloze number
+(define-key org-mode-map (kbd "M-N") 'anki-editor-cloze-region-dont-incr)
+
+(define-key org-mode-map (kbd "<f10>") 'anki-editor-reset-cloze-number)
+
+
+(setq anki-editor-create-decks t ;; Allow anki-editor to create a new deck if it doesn't exist
+      anki-editor-org-tags-as-anki-tags t) ;; use Org mode tags as Anki note tags
+
+(define-key global-map (kbd "C-c e") 'anki-capture) ;; capture a new note into Anki
+#+end_src
+
+
+# You can optionally set some defaults note settings for when you first
+# start Emacs:
+
+# #+begin_src emacs-lisp
+# (setq anki-capture-file "~/docs/anki.org") ; stores all anki-capture notes
+# (setq anki-capture-deck "INBOX")	   ; default deck to capture into
+# #+end_src
+
+* Usage
+
+The idea is that you can use =anki-editor='s note format to add new
+notes to Anki as quickly as possible. Often you will want to add a
+series of similar notes. =anki-capture= will assume that you want the
+same note settings (Anki deck, tags, and Anki note type) each time you
+invoke it unless you use a prefix argument (C-u). See =anki-capture='s
+docstring for more info: =C-h f anki-capture=.
+
+If you do not set =anki-capture-file=, notes will be stored in a
+buffer called =*anki-capture-storage-buffer*=. This will NOT be saved
+if you restart Emacs.
+
+I recommend using underscores "=_=" to emulate spaces in your tags because
+this will work well in both Org mode and Anki.
