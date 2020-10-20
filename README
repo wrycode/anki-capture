@@ -59,6 +59,10 @@ Configuration
   │ (define-key global-map (kbd "C-c e") 'anki-capture) ;; capture a new note into Anki
   └────
 
+  If you would like to automatically insert text from the kill
+  ring/clipboard into your notes, set the variable
+  `anki-capture-auto-yank' to non-nil.
+
 
 Usage
 ═════

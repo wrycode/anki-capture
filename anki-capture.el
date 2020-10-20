@@ -34,12 +34,15 @@
 ;; These are global vars that you can set yourself in your init
 (defcustom anki-capture-file nil
   "Optional file to save anki-capture notes in.")
+(defcustom anki-capture-auto-yank nil
+  "Whether to automatically yank the clipboard into your notes.")
 (defcustom anki-capture-deck nil
   "Current Anki deck for anki-capture.")
 (defcustom anki-capture-note-type nil
   "Current Anki note type for anki-capture.")
 (defcustom anki-capture-tags nil
   "Current tags for anki-capture.")
+
 
 ;; Thank you Cheong Yiufung for these functions!
 (defun anki-editor-cloze-region-auto-incr (&optional arg)
@@ -176,6 +179,7 @@ fresh and choose new note settings."
     (newline)
     (narrow-to-region (point) (point-max))
     (anki-capture-insert-note-skeleton)
+    (if anki-capture-auto-yank (yank))
     (org-show-all)
     (anki-editor-reset-cloze-number)))
 
