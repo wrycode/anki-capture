@@ -7,7 +7,7 @@
 ;;; Commentary:
 ;; Perhaps you want to use Emacs and Org mode for quickly adding notes to
 ;; Anki, but you do not want to deal with storing and organizing the
-;; notes in text format. =anki-capture= is an =org-capture=-like
+;; notes in text format. 'anki-capture' is an 'org-capture'-like
 ;; interface for adding notes directly to Anki from anywhere in Emacs.
 ;;
 ;;
