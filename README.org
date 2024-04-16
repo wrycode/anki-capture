@@ -16,7 +16,7 @@ Using [[https://github.com/raxod502/straight.el][straight.el]]
 (recommended):
 
 #+begin_src elisp
-(straight-use-package `(anki-capture :type git :repo "git://git.wrycode.com/wrycode/anki-capture.git"))
+(straight-use-package `(anki-capture :type git :repo "https://github.com/wrycode/anki-capture.git"))
 #+end_src
 
 I haven't bothered with MELPA yet, but =anki-capture.el= is a standard
